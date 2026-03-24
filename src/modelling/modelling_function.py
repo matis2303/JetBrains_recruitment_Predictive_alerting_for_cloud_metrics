@@ -53,7 +53,7 @@ def train_model(model, df: pd.DataFrame, drop_columns: list, target_column: str,
         fold_aucpr = average_precision_score(y_val, y_pred_proba)
         cv_metrics.append(fold_aucpr)
         
-        print(f"Fold {fold}/{n_splits} | Iteracje: {model.best_iteration:4d} | AUCPR walidacyjne: {fold_aucpr:.4f}")
+        print(f"Fold {fold}/{n_splits} | Iterations: {model.best_iteration:4d} | AUCPR validation: {fold_aucpr:.4f}")
         
         if fold == n_splits:
             best_model = model
@@ -62,7 +62,7 @@ def train_model(model, df: pd.DataFrame, drop_columns: list, target_column: str,
             
         fold += 1
 
-    print(f"\nŚrednie AUCPR z {n_splits} foldów: {np.mean(cv_metrics):.4f}")
+    print(f"\nAvg AUCPR from {n_splits} folds: {np.mean(cv_metrics):.4f}")
     
     plot_learning_curves(results)
     plot_feature_importance(best_model, final_X_train_columns)
